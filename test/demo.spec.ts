@@ -6,7 +6,7 @@ test.describe('Demo page', () => {
   });
 
   test('renders the app title', async ({ page }) => {
-    await expect(page.getByRole('heading', { name: 'ngaw-components' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'amolsw-components' })).toBeVisible();
   });
 
   test('shows all component demo sections', async ({ page }) => {

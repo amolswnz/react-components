@@ -1,5 +1,35 @@
+import { useEffect, useState } from 'react';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { codeToHtml, type BundledLanguage } from 'shiki';
+
+function ShikiCodeBlock({ code, lang }: { code: string; lang: string }) {
+  const [html, setHtml] = useState('');
+
+  useEffect(() => {
+    let cancelled = false;
+    const resolvedLang = (['tsx', 'ts', 'jsx', 'javascript', 'typescript'].includes(lang) ? 'tsx' : lang) as BundledLanguage;
+    codeToHtml(code, {
+      lang: resolvedLang,
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+      defaultColor: 'light',
+    }).then((result) => {
+      if (!cancelled) setHtml(result);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [code, lang]);
+
+  if (!html) {
+    return <div className='my-4 h-32 animate-pulse rounded-lg border bg-muted/50' />;
+  }
+
+  return <div className='my-4 overflow-x-auto rounded-lg border' dangerouslySetInnerHTML={{ __html: html }} />;
+}
 
 function MarkdownRenderer({ content }: { content: string }) {
   return (
@@ -22,11 +52,9 @@ function MarkdownRenderer({ content }: { content: string }) {
           code: ({ children, className }) => {
             const isBlock = typeof children === 'string' && children.includes('\n');
             if (isBlock) {
-              return (
-                <pre className='my-4 overflow-x-auto rounded-lg border bg-muted/50 p-4 text-sm'>
-                  <code className={className}>{children}</code>
-                </pre>
-              );
+              const langClass = className?.replace('language-', '') || '';
+              const codeStr = typeof children === 'string' ? children : String(children);
+              return <ShikiCodeBlock code={codeStr} lang={langClass} />;
             }
             return (
               <code className='rounded bg-muted px-1.5 py-0.5 text-sm font-mono'>{children}</code>

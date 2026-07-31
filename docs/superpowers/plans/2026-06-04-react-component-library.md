@@ -13,7 +13,7 @@
 ## File Structure
 
 ```
-ngaw-components/
+amolsw-components/
 ├── package.json
 ├── tsconfig.json
 ├── tsconfig.build.json
@@ -83,7 +83,7 @@ Then write `package.json`:
 
 ```jsonc
 {
-  "name": "ngaw-components",
+  "name": "amolsw-components",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -2126,7 +2126,7 @@ Consumers will import the CSS:
 
 ```tsx
 // In their app:
-import 'ngaw-components/styles.css';
+import 'amolsw-components/styles.css';
 ```
 
 - [ ] **Step 3: Build the library**

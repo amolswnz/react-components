@@ -1,8 +1,46 @@
-import { useState, useCallback } from 'react';
+import { Fragment, useState, useEffect, useCallback, type JSX } from 'react';
+import { jsx, jsxs } from 'react/jsx-runtime';
+import { codeToHast, type BundledLanguage } from 'shiki';
+import { toJsxRuntime } from 'hast-util-to-jsx-runtime';
 import { Check, Copy } from 'lucide-react';
 
-function CodeBlock({ code }: { code: string }) {
+function CodeBlock({ code, lang = 'tsx' }: { code: string; lang?: BundledLanguage }) {
+  const [highlighted, setHighlighted] = useState<JSX.Element | null>(null);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    codeToHast(code, {
+      lang,
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+      defaultColor: 'light',
+    }).then((hast) => {
+      if (!cancelled) {
+        const element = toJsxRuntime(hast, {
+          Fragment,
+          jsx,
+          jsxs,
+          components: {
+            pre: ({ children, ...props }) => (
+              <pre
+                className='overflow-x-auto rounded-lg border bg-[var(--shiki-bg)] p-4 text-sm leading-relaxed'
+                {...props}
+              >
+                {children}
+              </pre>
+            ),
+          },
+        }) as JSX.Element;
+        setHighlighted(element);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [code, lang]);
 
   const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(code).then(() => {
@@ -15,7 +53,7 @@ function CodeBlock({ code }: { code: string }) {
     <div className='relative'>
       <button
         onClick={handleCopy}
-        className='absolute right-2 top-2 flex items-center gap-1.5 rounded-md border bg-background px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground'
+        className='absolute right-2 top-2 z-10 flex items-center gap-1.5 rounded-md border bg-background/80 px-2 py-1 text-xs text-muted-foreground backdrop-blur transition-colors hover:bg-accent hover:text-foreground'
       >
         {copied ? (
           <>
@@ -29,9 +67,9 @@ function CodeBlock({ code }: { code: string }) {
           </>
         )}
       </button>
-      <pre className='overflow-x-auto rounded-lg border bg-muted/50 p-4 text-sm leading-relaxed'>
-        <code>{code}</code>
-      </pre>
+      {highlighted ?? (
+        <div className='h-48 animate-pulse rounded-lg border bg-muted/50' />
+      )}
     </div>
   );
 }
