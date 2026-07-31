@@ -54,7 +54,7 @@ const allUsers: User[] = [
   },
 ];
 
-function DataTableDemo() {
+function DataTablePreview() {
   const [page, setPage] = useState(1);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [search, setSearch] = useState('');
@@ -280,4 +280,4 @@ function DataTableDemo() {
   );
 }
 
-export { DataTableDemo };
+export { DataTablePreview };
