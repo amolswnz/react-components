@@ -1,0 +1,398 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "amolsw",
+  "homepage": "https://github.com/amolswnz/react-components",
+  "items": [
+    {
+      "name": "cn",
+      "type": "registry:lib",
+      "title": "cn (ClassName Utility)",
+      "description": "Utility function for merging Tailwind CSS classes using clsx and tailwind-merge.",
+      "dependencies": ["clsx", "tailwind-merge", "class-variance-authority"],
+      "files": [
+        { "path": "src/lib/utils.ts", "type": "registry:lib", "target": "@lib/amolsw/utils.ts" },
+        { "path": "src/lib/types.ts", "type": "registry:lib", "target": "@lib/amolsw/types.ts" },
+        { "path": "src/lib/highlight-match.tsx", "type": "registry:lib", "target": "@lib/amolsw/highlight-match.tsx" },
+        { "path": "src/lib/field-error.tsx", "type": "registry:lib", "target": "@lib/amolsw/field-error.tsx" },
+        { "path": "src/lib/index.ts", "type": "registry:lib", "target": "@lib/amolsw/index.ts" }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Shadcn Button component with variants.",
+      "files": [
+        { "path": "src/components/ui/button.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Shadcn Input component.",
+      "files": [
+        { "path": "src/components/ui/input.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Shadcn Label component.",
+      "files": [
+        { "path": "src/components/ui/label.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Shadcn Badge component.",
+      "files": [
+        { "path": "src/components/ui/badge.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Shadcn Card component.",
+      "files": [
+        { "path": "src/components/ui/card.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Shadcn Table component.",
+      "files": [
+        { "path": "src/components/ui/table.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Shadcn Select component.",
+      "dependencies": ["@radix-ui/react-select"],
+      "files": [
+        { "path": "src/components/ui/select.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Shadcn Popover component.",
+      "dependencies": ["@radix-ui/react-popover"],
+      "files": [
+        { "path": "src/components/ui/popover.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Shadcn Command component.",
+      "dependencies": ["cmdk"],
+      "registryDependencies": ["amolswnz/react-components/dialog"],
+      "files": [
+        { "path": "src/components/ui/command.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Shadcn Dialog component.",
+      "dependencies": ["@radix-ui/react-dialog"],
+      "files": [
+        { "path": "src/components/ui/dialog.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Shadcn Separator component.",
+      "dependencies": ["@radix-ui/react-separator"],
+      "files": [
+        { "path": "src/components/ui/separator.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "ScrollArea",
+      "description": "Shadcn ScrollArea component.",
+      "dependencies": ["@radix-ui/react-scroll-area"],
+      "files": [
+        { "path": "src/components/ui/scroll-area.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Shadcn Textarea component.",
+      "files": [
+        { "path": "src/components/ui/textarea.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Shadcn Toggle component.",
+      "dependencies": ["@radix-ui/react-toggle"],
+      "files": [
+        { "path": "src/components/ui/toggle.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "ToggleGroup",
+      "description": "Shadcn ToggleGroup component.",
+      "dependencies": ["@radix-ui/react-toggle-group"],
+      "registryDependencies": ["amolswnz/react-components/toggle"],
+      "files": [
+        { "path": "src/components/ui/toggle-group.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Shadcn Calendar component.",
+      "dependencies": ["react-day-picker"],
+      "registryDependencies": ["amolswnz/react-components/button"],
+      "files": [
+        { "path": "src/components/ui/calendar.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "InputGroup",
+      "description": "Shadcn InputGroup component.",
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/input", "amolswnz/react-components/textarea"],
+      "files": [
+        { "path": "src/components/ui/input-group.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Shadcn Tooltip component.",
+      "dependencies": ["@radix-ui/react-tooltip"],
+      "files": [
+        { "path": "src/components/ui/tooltip.tsx", "type": "registry:ui" }
+      ]
+    },
+    {
+      "name": "back-link",
+      "type": "registry:component",
+      "title": "BackLink",
+      "description": "A styled back navigation link with an arrow icon.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/back-link/back-link.tsx", "type": "registry:component", "target": "@components/amolsw/back-link/back-link.tsx" },
+        { "path": "src/components/back-link/index.ts", "type": "registry:component", "target": "@components/amolsw/back-link/index.ts" }
+      ]
+    },
+    {
+      "name": "back-to-top",
+      "type": "registry:component",
+      "title": "BackToTop",
+      "description": "A floating button that scrolls to the top of the page.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/back-to-top/back-to-top.tsx", "type": "registry:component", "target": "@components/amolsw/back-to-top/back-to-top.tsx" },
+        { "path": "src/components/back-to-top/index.ts", "type": "registry:component", "target": "@components/amolsw/back-to-top/index.ts" }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:component",
+      "title": "Pagination",
+      "description": "A pagination component with configurable page sizes and navigation.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/pagination/pagination.tsx", "type": "registry:component", "target": "@components/amolsw/pagination/pagination.tsx" },
+        { "path": "src/components/pagination/index.ts", "type": "registry:component", "target": "@components/amolsw/pagination/index.ts" }
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:component",
+      "title": "EmptyState",
+      "description": "An empty state placeholder with an icon, title, description, and optional action.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/empty-state/empty-state.tsx", "type": "registry:component", "target": "@components/amolsw/empty-state/empty-state.tsx" },
+        { "path": "src/components/empty-state/index.ts", "type": "registry:component", "target": "@components/amolsw/empty-state/index.ts" }
+      ]
+    },
+    {
+      "name": "icon-input",
+      "type": "registry:component",
+      "title": "IconInput",
+      "description": "An input field with a leading icon and optional error display.",
+      "registryDependencies": ["amolswnz/react-components/input", "amolswnz/react-components/label", "amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/icon-input/icon-input.tsx", "type": "registry:component", "target": "@components/amolsw/icon-input/icon-input.tsx" },
+        { "path": "src/components/icon-input/index.ts", "type": "registry:component", "target": "@components/amolsw/icon-input/index.ts" }
+      ]
+    },
+    {
+      "name": "password-input",
+      "type": "registry:component",
+      "title": "PasswordInput",
+      "description": "A password input with show/hide toggle and optional error display.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/input", "amolswnz/react-components/label", "amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/password-input/password-input.tsx", "type": "registry:component", "target": "@components/amolsw/password-input/password-input.tsx" },
+        { "path": "src/components/password-input/index.ts", "type": "registry:component", "target": "@components/amolsw/password-input/index.ts" }
+      ]
+    },
+    {
+      "name": "matched-fields-tooltip",
+      "type": "registry:component",
+      "title": "MatchedFieldsTooltip",
+      "description": "A tooltip that highlights matching text in a list of field names.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["amolswnz/react-components/tooltip"],
+      "files": [
+        { "path": "src/components/matched-fields-tooltip/matched-fields-tooltip.tsx", "type": "registry:component", "target": "@components/amolsw/matched-fields-tooltip/matched-fields-tooltip.tsx" },
+        { "path": "src/components/matched-fields-tooltip/index.ts", "type": "registry:component", "target": "@components/amolsw/matched-fields-tooltip/index.ts" }
+      ]
+    },
+    {
+      "name": "search-input",
+      "type": "registry:component",
+      "title": "SearchInput",
+      "description": "A search input with a search icon, clear button, and optional async search support.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/icon-input", "amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/search-input/search-input.tsx", "type": "registry:component", "target": "@components/amolsw/search-input/search-input.tsx" },
+        { "path": "src/components/search-input/index.ts", "type": "registry:component", "target": "@components/amolsw/search-input/index.ts" }
+      ]
+    },
+    {
+      "name": "single-select",
+      "type": "registry:component",
+      "title": "SingleSelect",
+      "description": "A single-select dropdown with search, options, and optional create-new support.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/command", "amolswnz/react-components/label", "amolswnz/react-components/popover", "amolswnz/react-components/cn", "amolswnz/react-components/use-debounce"],
+      "files": [
+        { "path": "src/components/single-select/single-select.tsx", "type": "registry:component", "target": "@components/amolsw/single-select/single-select.tsx" },
+        { "path": "src/components/single-select/index.ts", "type": "registry:component", "target": "@components/amolsw/single-select/index.ts" }
+      ]
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:component",
+      "title": "MultiSelect",
+      "description": "A multi-select dropdown with search, badge display, and optional create-new support.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["amolswnz/react-components/badge", "amolswnz/react-components/button", "amolswnz/react-components/command", "amolswnz/react-components/label", "amolswnz/react-components/popover", "amolswnz/react-components/cn", "amolswnz/react-components/use-debounce"],
+      "files": [
+        { "path": "src/components/multi-select/multi-select.tsx", "type": "registry:component", "target": "@components/amolsw/multi-select/multi-select.tsx" },
+        { "path": "src/components/multi-select/index.ts", "type": "registry:component", "target": "@components/amolsw/multi-select/index.ts" }
+      ]
+    },
+    {
+      "name": "date-range-field",
+      "type": "registry:component",
+      "title": "DateRangeField",
+      "description": "A date range picker field with calendar popover and optional error display.",
+      "dependencies": ["lucide-react", "date-fns", "react-day-picker"],
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/calendar", "amolswnz/react-components/label", "amolswnz/react-components/popover", "amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/date-range-field/date-range-field.tsx", "type": "registry:component", "target": "@components/amolsw/date-range-field/date-range-field.tsx" },
+        { "path": "src/components/date-range-field/index.ts", "type": "registry:component", "target": "@components/amolsw/date-range-field/index.ts" }
+      ]
+    },
+    {
+      "name": "date-time-field",
+      "type": "registry:component",
+      "title": "DateTimeField",
+      "description": "A date and time picker field with calendar and time select popovers.",
+      "dependencies": ["lucide-react", "date-fns"],
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/calendar", "amolswnz/react-components/label", "amolswnz/react-components/popover", "amolswnz/react-components/select", "amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/date-time-field/date-time-field.tsx", "type": "registry:component", "target": "@components/amolsw/date-time-field/date-time-field.tsx" },
+        { "path": "src/components/date-time-field/index.ts", "type": "registry:component", "target": "@components/amolsw/date-time-field/index.ts" }
+      ]
+    },
+    {
+      "name": "toast-provider",
+      "type": "registry:component",
+      "title": "ToastProvider",
+      "description": "A toast notification provider with success, error, warning, info, and loading variants.",
+      "dependencies": ["lucide-react", "react-hot-toast"],
+      "registryDependencies": ["amolswnz/react-components/button", "amolswnz/react-components/cn"],
+      "files": [
+        { "path": "src/components/toast-provider/toast-provider.tsx", "type": "registry:component", "target": "@components/amolsw/toast-provider/toast-provider.tsx" },
+        { "path": "src/components/toast-provider/index.ts", "type": "registry:component", "target": "@components/amolsw/toast-provider/index.ts" }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:component",
+      "title": "DataTable",
+      "description": "A feature-rich data table with sorting, filtering, and pagination.",
+      "dependencies": ["@tanstack/react-table", "lucide-react", "date-fns"],
+      "registryDependencies": [
+        "amolswnz/react-components/table",
+        "amolswnz/react-components/button",
+        "amolswnz/react-components/badge",
+        "amolswnz/react-components/input",
+        "amolswnz/react-components/label",
+        "amolswnz/react-components/select",
+        "amolswnz/react-components/toggle-group",
+        "amolswnz/react-components/empty-state",
+        "amolswnz/react-components/pagination",
+        "amolswnz/react-components/date-range-field",
+        "amolswnz/react-components/multi-select",
+        "amolswnz/react-components/search-input",
+        "amolswnz/react-components/cn"
+      ],
+      "files": [
+        { "path": "src/components/data-table/data-table.tsx", "type": "registry:component", "target": "@components/amolsw/data-table/data-table.tsx" },
+        { "path": "src/components/data-table/data-table-filters.tsx", "type": "registry:component", "target": "@components/amolsw/data-table/data-table-filters.tsx" },
+        { "path": "src/components/data-table/index.ts", "type": "registry:component", "target": "@components/amolsw/data-table/index.ts" }
+      ]
+    },
+    {
+      "name": "use-debounce",
+      "type": "registry:hook",
+      "title": "useDebounce",
+      "description": "A hook that debounces a value.",
+      "files": [
+        { "path": "src/hooks/use-debounce.ts", "type": "registry:hook", "target": "@hooks/amolsw/use-debounce.ts" }
+      ]
+    },
+    {
+      "name": "use-data-table-filters",
+      "type": "registry:hook",
+      "title": "useDataTableFilters",
+      "description": "A hook for managing data table filter state synced with URL search params.",
+      "registryDependencies": ["amolswnz/react-components/data-table"],
+      "files": [
+        { "path": "src/hooks/use-data-table-filters.ts", "type": "registry:hook", "target": "@hooks/amolsw/use-data-table-filters.ts" }
+      ]
+    }
+  ]
+}

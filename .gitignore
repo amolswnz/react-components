@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+.sisyphus/
+test-results/
+coverage
+.env
+
+*storybook.log
+storybook-static
+.playwright-mcp
+.opencode

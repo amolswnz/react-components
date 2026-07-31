@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+# Generate a conventional commit message from staged changes using opencode.
+# Usage:
+#   scripts/generate-commit-msg              — generate message + optional version bump
+#   scripts/generate-commit-msg --merge      — squash-merge develop into main
+#   scripts/generate-commit-msg --hook       — install as prepare-commit-msg hook
+
+MERGE=false
+HOOK=false
+NEW_VERSION=""
+for arg in "$@"; do
+  case "$arg" in
+    --merge) MERGE=true ;;
+    --hook) HOOK=true ;;
+    -h|--help) echo "Usage: $(basename "$0") [--merge|--hook]"; exit 0 ;;
+  esac
+done
+
+if $HOOK; then
+  SELF=$(realpath "$0")
+  cat > .git/hooks/prepare-commit-msg << 'HOOK'
+#!/usr/bin/env bash
+exec < /dev/tty
+MSG=$(scripts/generate-commit-msg 2>/dev/null)
+if [ -n "$MSG" ]; then
+  echo "$MSG" > "$1"
+fi
+HOOK
+  chmod +x .git/hooks/prepare-commit-msg
+  echo "Installed prepare-commit-msg hook."
+  exit 0
+fi
+
+generate_message() {
+  local FILES="$1"
+  local STAT="$2"
+  local PROMPT="Generate a short conventional commit message (max 80 chars) for these staged changes.
+Return ONLY the commit message, nothing else.
+
+Files changed: $FILES
+$STAT"
+  opencode run "$PROMPT" 2>/dev/null | tail -1
+}
+
+bump_version() {
+  local CURRENT
+  CURRENT=$(node -pe "require('./package.json').version")
+  echo "Current version: $CURRENT"
+  echo "Enter new version (or leave blank to skip):"
+  read -r INPUT_VERSION
+  if [ -n "$INPUT_VERSION" ]; then
+    if echo "$INPUT_VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.]+)?$'; then
+      node -e "
+        const pkg = require('./package.json');
+        pkg.version = '$INPUT_VERSION';
+        require('fs').writeFileSync('./package.json', JSON.stringify(pkg, null, 2) + '\n');
+      "
+      git add package.json
+      echo "Version bumped to $INPUT_VERSION"
+      NEW_VERSION="$INPUT_VERSION"
+    else
+      echo "Invalid semver format. Skipping."
+    fi
+  fi
+}
+
+if $MERGE; then
+  # Ensure we're on develop
+  BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  if [ "$BRANCH" != "develop" ]; then
+    echo "Must be on develop branch. Currently on $BRANCH."
+    exit 1
+  fi
+
+  # Collect all commits since main
+  FILES=$(git diff main...develop --name-only | paste -sd ',' -)
+  STAT=$(git diff main...develop --stat)
+  LOG=$(git log main..develop --oneline --no-decorate)
+
+  echo "Merging develop into main with squash."
+  echo ""
+  echo "Commits to merge:"
+  echo "$LOG"
+  echo ""
+
+  # Generate commit message from the diff
+  MSG=$(generate_message "$FILES" "$STAT")
+  echo ""
+  echo "Commit message: $MSG"
+  echo ""
+
+  # Do the merge first (stages all develop changes)
+  git checkout main
+  git merge --squash develop
+
+  # Version bump (modifies + stages package.json on main)
+  bump_version
+
+  # Commit with generated message (includes version bump)
+  git commit -m "$MSG"
+
+  if [ -n "$NEW_VERSION" ]; then
+    git tag -a "v$NEW_VERSION" -m "v$NEW_VERSION"
+    echo "Tagged v$NEW_VERSION"
+  fi
+
+  git checkout develop
+  echo "Merged and squashed into main."
+  exit 0
+fi
+
+# Default mode: staged changes
+if ! git diff --cached --quiet 2>/dev/null; then
+  FILES=$(git diff --cached --name-only | paste -sd ',' -)
+  STAT=$(git diff --cached --stat)
+elif ! git diff --quiet 2>/dev/null; then
+  FILES=$(git diff --name-only | paste -sd ',' -)
+  STAT=$(git diff --stat)
+else
+  echo "No changes detected."
+  exit 1
+fi
+
+MSG=$(generate_message "$FILES" "$STAT")
+echo ""
+echo "Commit message: $MSG"
+echo ""
+
+bump_version
