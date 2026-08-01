@@ -8,14 +8,12 @@ function ShikiCodeBlock({ code, lang }: { code: string; lang: string }) {
 
   useEffect(() => {
     let cancelled = false;
-    const resolvedLang = (['tsx', 'ts', 'jsx', 'javascript', 'typescript'].includes(lang) ? 'tsx' : lang) as BundledLanguage;
+    const resolvedLang = (
+      ['tsx', 'ts', 'jsx', 'javascript', 'typescript'].includes(lang) ? 'tsx' : lang
+    ) as BundledLanguage;
     codeToHtml(code, {
       lang: resolvedLang,
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark',
-      },
-      defaultColor: 'light',
+      theme: 'github-dark',
     }).then((result) => {
       if (!cancelled) setHtml(result);
     });
@@ -28,7 +26,12 @@ function ShikiCodeBlock({ code, lang }: { code: string; lang: string }) {
     return <div className='my-4 h-32 animate-pulse rounded-lg border bg-muted/50' />;
   }
 
-  return <div className='my-4 overflow-x-auto rounded-lg border' dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <div
+      className='my-4 overflow-x-auto whitespace-pre-wrap break-words rounded-lg border border-border text-xs leading-relaxed [&>pre]:!bg-[#0d1117] [&>pre]:!p-2 [&>pre]:!m-0 [&>pre]:!text-xs [&>pre]:!whitespace-pre-wrap [&>pre]:!break-words [&>pre>code]:!text-xs [&>pre>code]:!bg-transparent'
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 }
 
 function MarkdownRenderer({ content }: { content: string }) {
@@ -56,9 +59,7 @@ function MarkdownRenderer({ content }: { content: string }) {
               const codeStr = typeof children === 'string' ? children : String(children);
               return <ShikiCodeBlock code={codeStr} lang={langClass} />;
             }
-            return (
-              <code className='rounded bg-muted px-1.5 py-0.5 text-sm font-mono'>{children}</code>
-            );
+            return <code className='rounded bg-muted px-1.5 py-0.5 text-sm font-mono'>{children}</code>;
           },
           h1: ({ children }) => <h1 className='mb-4 text-2xl font-bold tracking-tight'>{children}</h1>,
           h2: ({ children }) => <h2 className='mb-3 mt-8 text-xl font-semibold tracking-tight'>{children}</h2>,

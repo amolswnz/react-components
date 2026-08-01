@@ -37,8 +37,6 @@ function Sidebar({ currentSlug, onNavigate }: { currentSlug: string; onNavigate:
           </div>
         ))}
       </div>
-      <Separator />
-      <div className='px-4 py-3 text-xs text-muted-foreground'>React component library</div>
     </aside>
   );
 }

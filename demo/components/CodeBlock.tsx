@@ -12,11 +12,7 @@ function CodeBlock({ code, lang = 'tsx' }: { code: string; lang?: BundledLanguag
     let cancelled = false;
     codeToHast(code, {
       lang,
-      themes: {
-        light: 'github-light',
-        dark: 'github-dark',
-      },
-      defaultColor: 'light',
+      theme: 'github-dark',
     }).then((hast) => {
       if (!cancelled) {
         const element = toJsxRuntime(hast, {
@@ -24,14 +20,15 @@ function CodeBlock({ code, lang = 'tsx' }: { code: string; lang?: BundledLanguag
           jsx,
           jsxs,
           components: {
-            pre: ({ children, ...props }) => (
+            pre: ({ children, style: _s, className: _c, ...props }) => (
               <pre
-                className='overflow-x-auto rounded-lg border bg-[var(--shiki-bg)] p-4 text-sm leading-relaxed'
+                className='overflow-x-auto whitespace-pre-wrap break-words rounded-lg border border-border bg-[#0d1117] p-2 text-xs leading-relaxed'
                 {...props}
               >
                 {children}
               </pre>
             ),
+            code: ({ style: _style, className: _className, ...props }) => <code className='text-xs' {...props} />,
           },
         }) as JSX.Element;
         setHighlighted(element);
@@ -67,9 +64,7 @@ function CodeBlock({ code, lang = 'tsx' }: { code: string; lang?: BundledLanguag
           </>
         )}
       </button>
-      {highlighted ?? (
-        <div className='h-48 animate-pulse rounded-lg border bg-muted/50' />
-      )}
+      {highlighted ?? <div className='h-48 animate-pulse rounded-lg border bg-muted/50' />}
     </div>
   );
 }
