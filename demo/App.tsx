@@ -22,7 +22,7 @@ function App() {
           )}
         </main>
       </div>
-      <Footer copyright={`© ${new Date().getFullYear()} Amol Wankhede`} />
+      <Footer copyright={`React component library © ${new Date().getFullYear()} Amol Wankhede`} />
     </div>
   );
 }
